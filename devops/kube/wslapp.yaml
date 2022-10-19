@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wslapp
+  namespace: test
+spec:
+  selector:
+    matchLabels:
+      run: wslapp
+  template:
+    metadata:
+      labels:
+        run: wslapp
+    spec:
+      containers:
+      - name: wslapp
+        image: 127.0.0.1:5100/wslapp:1.1  # your images name
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wslapp
+  namespace: test
+spec:
+  selector:
+    run: wslapp
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30070
+    protocol: TCP
+  type: NodePort 
+  
+

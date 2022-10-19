@@ -1,0 +1,61 @@
+# phpmyadmin service
+apiVersion: v1
+kind: Service
+metadata:
+  name: ci4-phpmyadmin
+spec:
+  type: NodePort
+  selector:
+    app: phpmyadmin
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30090
+
+# phpmyadmin deployment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci4-phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+        - name: ci4-phpmyadmin
+          image: phpmyadmin/phpmyadmin
+          resources:
+            limits:
+              cpu: 800m # the CPU limit is define in milicore (m)
+              memory: 800Mi # the Memory is define in Mebibytes (Mi)
+            requests:
+              cpu: 500m
+          ports:
+            - containerPort: 80
+          env:
+            - name: PMA_HOST
+              value: "ci4-db"
+            - name: PMA_PORT
+              value: "3306"
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: ci4-secret
+                  key: password
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: ci4-secret
+                  key: user
+            - name: MYSQL_DATABASE
+              value: "ci4"

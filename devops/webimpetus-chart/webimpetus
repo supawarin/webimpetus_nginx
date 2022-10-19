@@ -1,0 +1,230 @@
+---
+# Source: webimpetus/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: release-name-webimpetus
+  namespace: dev
+  labels:
+    helm.sh/chart: webimpetus-0.1.0
+    app.kubernetes.io/name: webimpetus
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+---
+# Source: webimpetus/templates/secrets.yaml
+# ######################################################
+# # Secret: Create Multiples encripted data
+# ######################################################
+ apiVersion: v1
+ kind: Secret
+ metadata:
+   name: wsl-secret-dev
+   namespace: dev
+ data:
+   env_file: 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
+---
+# Source: webimpetus/templates/configmaps.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wsl-bootstrap-cm-dev
+  namespace: dev
+data:
+    wslbootstrap.sh: |
+        #!/bin/bash
+        set -x
+        echo "Workstation Bootstrap Script"
+        echo "==========================="
+        cp /tmp/secrets/.env /var/www/html/.env
+        FILE=/var/www/html/.env
+        if test -f "$FILE"; then
+            echo "$FILE exists."
+            echo "==========================="
+            echo "Workstation Bootstrap Script Copied"
+            echo "==========================="
+        fi
+            echo "Starting Workstation"
+            echo "==========================="
+            php -v
+        echo "==========================="
+        yes | composer update
+        chmod 777 -R /var/www/html/writable/
+        chmod 777 -R /var/www/html/writable/cache/
+        chmod 777 -R /var/www/html/writable/session/
+        APP_RELEASE_NOTES_DOC_URL="https://localhost:32180"
+        export APP_RELEASE_NOTES_DOC_URL=$APP_RELEASE_NOTES_DOC_URL
+        DATE_GEN_VERSION=$(date +"%Y%m%d%I%M%S")
+        export DATE_GEN_VERSION=$(date +"%Y%m%d%I%M%S")
+        echo APP_DEPLOYED_AT=$DATE_GEN_VERSION >> $FILE
+        echo APP_ENVIRONMENT="dev" >> $FILE
+        echo APP_RELEASE_NOTES_DOC_URL=$APP_RELEASE_NOTES_DOC_URL >> $FILE
+        echo DYNAMIC_SCRIPTS_PATH=/tmp >> $FILE
+        echo "==========================="
+---
+# Source: webimpetus/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wsl-nodeport-dev
+  namespace: dev
+spec:
+  selector:
+    app: wsl-dev
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 32180
+  type: NodePort
+---
+# Source: webimpetus/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: wsl-svc-dev
+  namespace: dev
+spec:
+  selector:
+    app: wsl-dev
+  ports:
+    - port: 80
+      targetPort: 80
+  type: ClusterIP
+---
+# Source: webimpetus/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wsl-dev
+  namespace: dev
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wsl-dev
+  template:
+    metadata:
+      labels:
+        app: wsl-dev
+    spec:
+      containers:
+        - name: wsl-dev
+          image: registry.workstation.co.uk/workstation:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: "APACHE_CONFDIR"
+              value: "/etc/apache2"
+            - name: "APACHE_DOCUMENT_ROOT"
+              value: "/var/www/html/public"
+            - name: "APACHE_ENVVARS"
+              value: "/etc/apache2/envvars"
+            - name: "APACHE_RUN_DIR"
+              value: "/var/run/apache2"
+            # - name: DYNAMIC_SCRIPTS_PATH
+            #   value: "/var/www/html/writable"
+            - name: DYNAMIC_SCRIPTS_PATH
+              value: "/tmp"
+          imagePullPolicy: Always
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "stat -c %a /tmp && ls -la /tmp && cp /tmp/configmap/wslbootstrap.sh /usr/local/bin/wslbootstrap.sh && chmod +x /usr/local/bin/wslbootstrap.sh && sh /usr/local/bin/wslbootstrap.sh"]
+          volumeMounts:      
+            - name: wsl-bootstrap-cm-vol
+              mountPath: /tmp/configmap
+            - name: wslenv-vol-dev
+              mountPath: /tmp/secrets
+              # `bootstrap` mount bash script from configmap wsl-bootstrap-cm-dev
+              # execute in the poststrat lifecycle hook
+
+      volumes:
+        - name: wsl-bootstrap-cm-vol
+          # Populate the volume with config map data
+          configMap:
+            # `name` here must match the name 
+            # specified in the ConfigMap's YAML 
+           name: wsl-bootstrap-cm-dev
+        - name: wslenv-vol-dev
+          secret:
+            secretName: wsl-secret-dev
+            items:
+            - key: env_file
+              path: .env
+---
+# Source: webimpetus/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wsl-ingress-dev
+  namespace: dev
+  annotations:
+    #kubernetes.io/ingress.class: nginx
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: "localhost"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wsl-svc-dev
+                port:
+                  number: 80
+---
+# Source: webimpetus/templates/volumClaim.yaml
+#  pvc---
+
+ apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wslenv-vol-dev
+  namespace: dev
+  labels:
+    app: wsl-dev
+spec: 
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+# Source: webimpetus/templates/sealedsecrets.yaml
+######################################################
+# Secret: Create Multiples encripted data
+######################################################
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: wsl-secret-dev
+  namespace: dev
+spec:
+  encryptedData:
+    env_file: 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
+  template:
+    metadata:
+      name: wsl-secret-dev
+      namespace: dev
+---
+# Source: webimpetus/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "release-name-webimpetus-test-connection"
+  labels:
+    helm.sh/chart: webimpetus-0.1.0
+    app.kubernetes.io/name: webimpetus
+    app.kubernetes.io/instance: release-name
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['release-name-webimpetus:32180']
+  restartPolicy: Never

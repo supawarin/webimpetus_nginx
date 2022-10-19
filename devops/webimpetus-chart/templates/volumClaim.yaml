@@ -1,0 +1,18 @@
+ #  pvc
+ {{- /*
+ apiVersion: v1
+ kind: PersistentVolumeClaim
+ metadata:
+   name: {{ .Values.service_name }}-bootstrap-cm-vol
+   namespace: {{ .Values.targetNS }}
+   labels:
+     app: wsl-{{ .Values.targetEnv }}
+ spec:
+   accessModes:
+   - ReadWriteOnce
+   resources:
+     requests:
+       storage: 3Gi   
+*/ -}}
+
+
