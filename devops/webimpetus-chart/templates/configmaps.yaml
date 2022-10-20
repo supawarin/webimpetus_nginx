@@ -37,15 +37,16 @@ data:
         echo APP_RELEASE_NOTES_DOC_URL=$APP_RELEASE_NOTES_DOC_URL >> $FILE
         echo DYNAMIC_SCRIPTS_PATH=/tmp >> $FILE
         echo "==========================="
-        echo "Copy apache config file for Workstation"
-        cp /tmp/configmap/workstation.conf /etc/apache2/sites-available/000-default.conf
-        echo "==========================="
-        echo "Restart apache2"
-        apachectl graceful
+        #echo "Copy nginx config file for Workstation"
+        #cp /tmp/configmap/workstation.conf /etc/nginx/sites-available/000-default.conf
+        #echo "==========================="
+        #echo "Restart nginx"
+        #apachectl graceful
         #apachectl restart
         # a2ensite 000-default
         # service apache2 reload
         echo "==========================="
+  
     workstation.conf: |
         <VirtualHost *:80>
             ServerAdmin webmaster@localhost
@@ -56,4 +57,30 @@ data:
                         AllowOverride all
                 </Directory>
         </VirtualHost>
-        ServerName 127.0.0.1
+        ServerName 127.0.0.1 
+
+
+    workstation-nginx.conf: |
+       user nginx;
+       worker_processes  1;
+       events {
+          worker_connections  10240;
+        }
+       http {
+          server {
+            listen       80;
+            server_name  {{ .Values.targetEnv }}-my.workstation.co.uk;
+            access_log   logs/domain2.access.log  main;
+
+            # serve static files
+            location ~ ^/(images|javascript|js|css|flash|media|static)/  {
+              root    /var/www/virtual/big.server.com/htdocs;
+              expires 30d;
+             }
+
+            # pass requests for dynamic content to rails/turbogears/zope, et al
+            location / {
+                proxy_pass  http://127.0.0.1:8080;     
+             }
+          }
+       }

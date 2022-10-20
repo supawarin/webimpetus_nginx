@@ -19,28 +19,28 @@ spec:
           ports:
             - containerPort: 80
           env:
-            - name: "APACHE_CONFDIR"
-              value: "/etc/apache2"
-            - name: "APACHE_DOCUMENT_ROOT"
+            - name: "NGINX_CONFDIR"
+              value: "/etc/nginx"
+            - name: "NGINX_DOCUMENT_ROOT"
               value: "/var/www/html/public"
-            - name: "APACHE_ENVVARS"
-              value: "/etc/apache2/envvars"
-            - name: "APACHE_RUN_DIR"
-              value: "/var/run/apache2"
+            - name: "NGINX_ENVVARS"
+              value: "/etc/nginx/envvars"
+            - name: "NGINX_RUN_DIR"
+              value: "/var/run/nginx"
             # - name: DYNAMIC_SCRIPTS_PATH
             #   value: "/var/www/html/writable"
             - name: DYNAMIC_SCRIPTS_PATH
               value: "/tmp"
-            - name: APACHE_RUN_USER
+            - name: NGINX_RUN_USER
               value: "www-data"
-            - name: APACHE_RUN_GROUP
+            - name: NGINX_RUN_GROUP
               value: "www-data"
-            - name: APACHE_PID_FILE
-              value: "/var/run/apache2$SUFFIX.pid"
-            - name: APACHE_RUN_DIR
-              value: "/var/run/apache2$SUFFIX"
-            - name: APACHE_LOG_DIR
-              value: "/var/log/apache2$SUFFIX"
+            - name: NGINX_PID_FILE
+              value: "/var/run/nginx.pid"
+            - name: NGINX_RUN_DIR
+              value: "/var/run/nginx"
+            - name: NGINX_LOG_DIR
+              value: "/var/log/nginx"
           imagePullPolicy: Always
           lifecycle:
             postStart:

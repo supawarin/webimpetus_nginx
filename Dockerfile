@@ -170,7 +170,9 @@ RUN /usr/local/openresty/bin/openresty -V
 
 RUN php -v
 
+
 CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
+
 
 EXPOSE 80
 
