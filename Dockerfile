@@ -53,6 +53,7 @@ RUN apk update && \
     build-base \
     coreutils \
     curl \
+    bash \
     gd-dev \
     geoip-dev \
     libxslt-dev \
@@ -74,12 +75,14 @@ RUN apk update && \
 RUN php -v
 
 ARG SOURCES_DIR="/src"
+
+WORKDIR /var/www/html
 RUN mkdir -p ${SOURCES_DIR} && cd ${SOURCES_DIR}
 
 ARG LOGS_DIR="/var/log/nginx"
 RUN mkdir -p ${LOGS_DIR}
 
-WORKDIR ${SOURCES_DIR}
+#WORKDIR ${SOURCES_DIR}
 
 RUN cd ${SOURCES_DIR} && wget https://openresty.org/download/openresty-1.11.2.5.tar.gz -O ${SOURCES_DIR}/openresty-1.11.2.5.tar.gz \
     && tar -zxvf ${SOURCES_DIR}/openresty-1.11.2.5.tar.gz
@@ -171,11 +174,17 @@ RUN /usr/local/openresty/bin/openresty -V
 RUN php -v
 
 
-CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
+#CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;"]
+#CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;", "php-fpm --nodaemonize"]
 
+RUN apk add supervisor
+COPY devops/docker/supervisord.conf /etc/
+
+ENTRYPOINT /usr/bin/supervisord -c /etc/supervisord.conf
 
 EXPOSE 80
 
+# Use SIGQUIT instead of default SIGTERM to cleanly drain requests
+# See https://github.com/openresty/docker-openresty/blob/master/README.md#tips--pitfalls
 
-
-#RUN nginx -v
+STOPSIGNAL SIGQUIT
