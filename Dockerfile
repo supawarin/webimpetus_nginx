@@ -76,13 +76,12 @@ RUN php -v
 
 ARG SOURCES_DIR="/src"
 
-WORKDIR /var/www/html
 RUN mkdir -p ${SOURCES_DIR} && cd ${SOURCES_DIR}
 
 ARG LOGS_DIR="/var/log/nginx"
 RUN mkdir -p ${LOGS_DIR}
 
-#WORKDIR ${SOURCES_DIR}
+WORKDIR ${SOURCES_DIR}
 
 RUN cd ${SOURCES_DIR} && wget https://openresty.org/download/openresty-1.11.2.5.tar.gz -O ${SOURCES_DIR}/openresty-1.11.2.5.tar.gz \
     && tar -zxvf ${SOURCES_DIR}/openresty-1.11.2.5.tar.gz

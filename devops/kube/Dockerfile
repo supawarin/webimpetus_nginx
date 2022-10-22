@@ -10,10 +10,10 @@ RUN apk update && apk upgrade \
 WORKDIR /var/www/html
 COPY ./ci4 /var/www/html
 
-COPY ./html/public/index.php /var/www/html/public/index.php
+#COPY ./html/public/index.php /var/www/html/public/index.php
 
-#RUN chown -R www-data:www-data /var/www/html
- RUN chmod 755 /var/www/html/
+RUN chown -R www-data:root /var/www/html
+RUN chmod -R 755 /var/www/html/ 
 
 COPY ./devops/kube/config/php/php.ini /usr/local/etc/php/php.ini
 COPY ./devops/kube/config/vhosts/default.conf /etc/nginx/sites-enabled/default.conf
