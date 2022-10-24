@@ -7,6 +7,7 @@ RUN apk update && apk upgrade \
      curl \
      jq \
      wget 
+     
 WORKDIR /var/www/html
 COPY ./ci4 /var/www/html
 
@@ -27,5 +28,5 @@ COPY ./devops/kube/config/vhosts/nginx.conf /usr/local/openresty/nginx/conf/ngin
 #CMD ["php-fpm", "--nodaemonize"]
 #CMD ["/usr/local/openresty/bin/openresty", "-g", "daemon off;", "php-fpm --nodaemonize"]
 # ENTRYPOINT /usr/bin/supervisord -c /etc/supervisord.conf
-# # #COPY logs/nginx/* /var/log
+#COPY logs/nginx/* /var/log
 # EXPOSE 80
