@@ -3,7 +3,7 @@
     <tr style=" width:100%;">
         <td align="left">
         <h4>SRL Balinder Walia Workstation
-            <br />TAvenue de Roodebeeck 78, 1030<br />
+            <br />Avenue de Roodebeeck 78, 1030<br />
             BRUXELLES ( SCHAERBEEK )<br />
             workstationsols@gmail.com<br />Tel: 049 245 67465
         </h4>

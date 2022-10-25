@@ -44,6 +44,8 @@
                         } ?></a>
                         <?php }?>
                         <button data-toggle="modal" data-target="#exampleModal" href="<?php echo base_url("timeslips/downloadPdf"); ?>" class="btn btn-primary"><i class="ti-export"></i> Export Pdf</button>
+
+                        <button data-toggle="modal" data-target="#invoiceTimeslip" href="<?php echo base_url("timeslips/downloadPdf"); ?>" class="btn btn-primary"><i class="ti-file"></i> Create Invoice </button>
                     </div>
 
             </div>

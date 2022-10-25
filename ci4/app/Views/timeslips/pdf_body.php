@@ -21,7 +21,9 @@
 
         <tr>
           <td> Project name</td>
+          
           <td>HD4D</td>
+          
           <td>Timeslip date</td>
           <td><?php echo date("d-m-Y", time()); ?></td>
 
